@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Dashboard</title>	
+	<style type="text/css">    
+	</style>
+</head>  
+  
+<body>
+<div>
+{% if not session.logged_in %}
+    <a href="{{ url_for('login') }}">log in</a>
+{% else %}
+    <a href="{{ url_for('logout') }}">log out</a>
+{% endif %}
+</div>
+
+{% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
+
+    <p>Add a New Student:</p>
+
+    {% if session.logged_in %}        
+	<div>
+	<form action="/student/add" method="post">
+            <table border="1">
+            <tr>
+            <th>Student First Name:</th>
+            <td><input type="text" name="first_name"></input></td>
+            </tr>
+            <tr>
+            <th>Student Last Name:</th>
+            <td><input type="text" name="last_name"></input></td>
+            </tr>
+            <tr><th></th>
+            <td><input type="submit" value="Add Student"></input></td>
+            </tr>
+            </table>
+        </form>
+	</div>
+    {% endif %}
+	
+</body>
+</html>

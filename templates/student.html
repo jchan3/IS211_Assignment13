@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Dashboard</title>	
+	<style type="text/css">    
+	</style>
+</head>  
+  
+<body>
+<div>
+{% if not session.logged_in %}
+    <a href="{{ url_for('login') }}">log in</a>
+{% else %}
+    <a href="{{ url_for('logout') }}">log out</a>
+{% endif %}
+</div>
+
+    <p>Student Quiz Results:</p>
+
+    <table border="1">
+        <tr>
+            <th>Quiz ID</th>
+            <th>Score</th>
+        </tr>
+    {% for result in results %}
+        <tr>
+            <td>
+            {{ result[1] }}
+            </td>
+            <td>
+            {{ result[0] }}
+            </td>
+        </tr>
+    {% else %}
+        <tr><td><em>No Results</em></td>
+        <td><em>No Results</em></td>
+        </tr>
+    {% endfor %}
+    </table>
+	
+</body>
+</html>

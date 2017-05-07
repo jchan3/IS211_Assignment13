@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Dashboard</title>	
+	<style type="text/css">    
+	</style>
+</head>  
+  
+<body>
+<div>
+{% if not session.logged_in %}
+    <a href="{{ url_for('login') }}">log in</a>
+{% else %}
+    <a href="{{ url_for('logout') }}">log out</a>
+{% endif %}
+</div>
+
+    <p>Add a Student's Quiz Result:</p>      
+
+    {% if session.logged_in %}        
+	<div>
+	<form action="/results/add" method="post">
+            <table border="1">
+            <tr>
+            <th>Enter Student ID Number:</th>
+            <td><select name="sid">
+        {% for student in students %}
+                <option value="{{ student[0] }}">{{ student[0] }}</option>
+        {% else %}
+                <option value="">No data so far</option>
+        {% endfor %}
+            </select></td>
+            </tr>
+            <tr>
+            <th>Enter Quiz ID Number:</th>
+            <td><select name="qid">
+        {% for quiz in quizzes %}
+                <option value="{{ quiz[0] }}">{{ quiz[0] }}</option>
+        {% else %}
+                <option value="">No data so far</option>
+        {% endfor %}
+            </select></td>
+            </tr>            
+            <tr>
+            <th>Enter Score:</th>
+            <td><input type="text" name="score"></input></td>
+            </tr>
+            <tr><th></th>
+            <td><input type="submit" value="Add Quiz Result"></input></td>
+            </tr>
+            </table>
+        </form>
+	</div>
+    {% endif %}
+	
+</body>
+</html>

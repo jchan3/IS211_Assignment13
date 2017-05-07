@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Dashboard</title>	
+	<style type="text/css">    
+	</style>
+</head>  
+  
+<body>
+<div>
+{% if not session.logged_in %}
+    <a href="{{ url_for('login') }}">log in</a>
+{% else %}
+    <a href="{{ url_for('logout') }}">log out</a>
+{% endif %}
+</div>
+
+    <p>Add a New Quiz:</p>
+    {% if session.logged_in %}        
+	<div>
+	<form action="/quiz/add" method="post">
+            <table border="1">
+            <tr>
+            <th>Quiz Subject:</th>
+            <td><input type="text" name="subject"></input></td>
+            </tr>
+            <tr>
+            <th>Number of Questions:</th>
+            <td><input type="text" name="num_questions"></input></td>
+            </tr>
+            <tr>
+            <th>Date (YYYY-MM-DD):</th>
+            <td><input type="date" name="qdate"></input></td>
+            </tr>
+            <tr><th></th>
+            <td><input type="submit" value="Add New Quiz"></input></td>
+            </tr>
+            </table>
+        </form>
+	</div>
+    {% endif %}
+	
+</body>
+</html>
